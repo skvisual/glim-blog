@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
+const mongoose = require('mongoose');
 
 const app = new express();
 const PORT = 3000;
@@ -26,6 +27,8 @@ app.get('/post',(req, res) => {
     res.render('post')
 })
 
+
+mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true})
 
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`)
