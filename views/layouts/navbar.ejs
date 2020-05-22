@@ -12,32 +12,11 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/posts/new">New Post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/post">Sample Post</a>
+            <a class="nav-link" href="/auth/register">Create Account</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>
-          <% if(loggedIn) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/posts/new">New Post</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/logout">LOG OUT</a>
-            </li>
-          <% } %>
-          <% if(!loggedIn) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/register">Create Account</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/login">LOGIN</a>
-            </li>
-            <% } %>
-          
-
         </ul>
       </div>
     </div>
