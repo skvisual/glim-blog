@@ -78,7 +78,9 @@ app.get('/posts/new', authMiddleware, (req, res)=> {
 })
 
 app.get('/auth/register', redirectMiddleware, (req, res) => {
-    res.render('register')
+    res.render('register', {
+        errors: req.session.validationErrors
+    })
 })
 
 app.get('/auth/login', redirectMiddleware, (req, res) => {
@@ -99,8 +101,10 @@ app.post('/posts/store', authMiddleware, (req, res) => {
 })
 
 app.post('/users/register', redirectMiddleware, (req, res) => {
-    User.create(req.body, (err, user) => {
-        if (err){
+    User.create(req.body, (error, user) => {
+        if (error){
+            const validationErrors = Object.keys(error.errors).map(key => error.errors[key].message)
+            req.session.validationErrors = validationErrors
             return res.redirect('/auth/register')
         } else {
             res.redirect('/')

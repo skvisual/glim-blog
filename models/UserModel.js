@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
+var usernameValidator = require('mongoose-unique-validator');
 
 const UserSchema = new Schema({
     username: {
@@ -21,6 +22,8 @@ UserSchema.pre('save', function(next){
         next()
     })
 })
+
+UserSchema.plugin(usernameValidator);
 
 const User = mongoose.model('User', UserSchema);
 
