@@ -5,13 +5,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
 const User = require('./models/UserModel');
+const loginController = require('./controllers/loginUser');
 const fileUpload = require('express-fileupload');
 
 const app = new express();
 const PORT = 3000;
 
 const validateMiddleWare = (req,res,next) => {
-    if(req.files == null || req.body.title == null || req.body.title == null) {
+    if(req.body.title == null || req.body.title == null) {
         return res.redirect('/posts/new')
     }
     next()
@@ -61,6 +62,10 @@ app.get('/auth/register', (req, res) => {
     res.render('register')
 })
 
+app.get('/auth/login', (req, res) => {
+    res.render('login')
+})
+
 app.post('/posts/store', (req, res) => {
     let image = req.files.image;
     image.mv(path.resolve(__dirname, 'public/img', image.name), async (err) => {
@@ -74,9 +79,15 @@ app.post('/posts/store', (req, res) => {
 
 app.post('/users/register', (req, res) => {
     User.create(req.body, (err, user) => {
-        res.redirect('/')
+        if (err){
+            return res.redirect('/auth/register')
+        } else {
+            res.redirect('/')
+        }
     })
 })
+
+app.post('/users/login', loginController);
 
 
 
