@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
 const User = require('./models/UserModel');
 const fileUpload = require('express-fileupload');
+const newUserController = require('./controllers/newUser');
+const storeUserController = require('./controllers/storeUser');
 const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
 const storePostController = require('./controllers/storePost');
@@ -34,17 +36,11 @@ app.get('/post/:id', getPostController)
 
 app.get('/posts/new', newPostController)
 
-app.get('/auth/register', (req, res) => {
-    res.render('register')
-})
+app.get('/auth/register', newUserController)
 
 app.post('/posts/store', storePostController)
 
-app.post('/users/register', (req, res) => {
-    User.create(req.body, (err, user) => {
-        res.redirect('/')
-    })
-})
+app.post('/users/register', storeUserController);
 
 
 
