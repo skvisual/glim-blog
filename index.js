@@ -6,7 +6,11 @@ const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
 const User = require('./models/UserModel');
 const loginController = require('./controllers/loginUser');
+const logoutController = require('./controllers/logout');
 const fileUpload = require('express-fileupload');
+const expressSession = require('express-session');
+const authMiddleware = require('./middleware/authMiddlware');
+const redirectMiddleware = require('./middleware/redirectMiddleware');
 
 const app = new express();
 const PORT = 3000;
@@ -18,11 +22,20 @@ const validateMiddleWare = (req,res,next) => {
     next()
 }
 
+global.loggedIn = null;
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/posts/store',validateMiddleWare)
+app.use(expressSession({
+    secret: 'skvblog'
+}))
+app.use('*', (req, res, next) => {
+    loggedIn = req.session.userId;
+    next()
+});
 app.set('view engine', 'ejs');
 
 
@@ -32,6 +45,8 @@ app.set('view engine', 'ejs');
 
 app.get('/', async (req, res) => {
     const blogposts = await BlogPost.find({})
+    console.log(req.session);
+    
     res.render('index', {
         blogposts
     });
@@ -54,19 +69,25 @@ app.get('/post/:id', async (req,res) => {
     })
 })
 
-app.get('/posts/new', (req, res)=> {
-    res.render('create')
+app.get('/posts/new', authMiddleware, (req, res)=> {
+    if (req.session.userId){
+        return res.render('create')
+    } else {
+        return res.render('/auth/login')
+    }
 })
 
-app.get('/auth/register', (req, res) => {
+app.get('/auth/register', redirectMiddleware, (req, res) => {
     res.render('register')
 })
 
-app.get('/auth/login', (req, res) => {
+app.get('/auth/login', redirectMiddleware, (req, res) => {
     res.render('login')
 })
 
-app.post('/posts/store', (req, res) => {
+app.get('/auth/logout', logoutController)
+
+app.post('/posts/store', authMiddleware, (req, res) => {
     let image = req.files.image;
     image.mv(path.resolve(__dirname, 'public/img', image.name), async (err) => {
         await BlogPost.create({
@@ -77,7 +98,7 @@ app.post('/posts/store', (req, res) => {
         })
 })
 
-app.post('/users/register', (req, res) => {
+app.post('/users/register', redirectMiddleware, (req, res) => {
     User.create(req.body, (err, user) => {
         if (err){
             return res.redirect('/auth/register')
@@ -87,7 +108,8 @@ app.post('/users/register', (req, res) => {
     })
 })
 
-app.post('/users/login', loginController);
+app.post('/users/login', redirectMiddleware, loginController);
+
 
 
 
