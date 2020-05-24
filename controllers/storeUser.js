@@ -3,6 +3,11 @@ const path = require('path');
 
 module.exports = (req, res) => {
     User.create(req.body, (error, user) => {
-        res.redirect('/')
-    })
+        console.log(error);
+        if (error){
+            res.redirect('/auth/register')
+        } else {
+            res.redirect('/')
+        }
+    });
 }
