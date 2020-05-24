@@ -7,6 +7,8 @@ const BlogPost = require('./models/BlogPost');
 const User = require('./models/UserModel');
 const fileUpload = require('express-fileupload');
 const newUserController = require('./controllers/newUser');
+const loginController = require('./controllers/login');
+const loginUserController = require('./controllers/loginUser');
 const storeUserController = require('./controllers/storeUser');
 const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
@@ -38,9 +40,13 @@ app.get('/posts/new', newPostController)
 
 app.get('/auth/register', newUserController)
 
+app.get('/auth/login', loginController);
+
 app.post('/posts/store', storePostController)
 
 app.post('/users/register', storeUserController);
+
+app.post('/users/login', loginUserController);
 
 
 
