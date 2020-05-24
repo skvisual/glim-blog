@@ -15,6 +15,7 @@ const homeController = require('./controllers/home');
 const storePostController = require('./controllers/storePost');
 const getPostController = require('./controllers/getPost');
 const validateMiddleware = require('./middleware/validatonMiddleware');
+const authMiddleware = require('./middleware/authMiddleware');
 const expressSession = require('express-session')
 
 const app = new express();
@@ -40,13 +41,13 @@ app.get('/', homeController)
 
 app.get('/post/:id', getPostController)
 
-app.get('/posts/new', newPostController)
+app.get('/posts/new', authMiddleware, newPostController)
 
 app.get('/auth/register', newUserController)
 
 app.get('/auth/login', loginController);
 
-app.post('/posts/store', storePostController)
+app.post('/posts/store', authMiddleware, storePostController)
 
 app.post('/users/register', storeUserController);
 
