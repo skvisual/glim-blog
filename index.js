@@ -15,6 +15,7 @@ const homeController = require('./controllers/home');
 const storePostController = require('./controllers/storePost');
 const getPostController = require('./controllers/getPost');
 const validateMiddleware = require('./middleware/validatonMiddleware');
+const expressSession = require('express-session')
 
 const app = new express();
 const PORT = 3000;
@@ -25,6 +26,9 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use('/posts/store', validateMiddleware)
+app.use(expressSession({
+    secret: 'd86j2p412k901scaw'
+}))
 app.set('view engine', 'ejs');
 
 
