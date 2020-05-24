@@ -18,7 +18,8 @@ const getPostController = require('./controllers/getPost');
 const validateMiddleware = require('./middleware/validatonMiddleware');
 const authMiddleware = require('./middleware/authMiddleware');
 const redirectMiddleware = require('./middleware/redirectMiddleware');
-const expressSession = require('express-session')
+const expressSession = require('express-session');
+const flash = require('connect-flash');
 
 const app = new express();
 const PORT = 3000;
@@ -38,6 +39,7 @@ app.use("*", (req, res, next) => {
     loggedIn = req.session.userId;
     next()
 });
+// app.use(flash());
 app.set('view engine', 'ejs');
 
 
