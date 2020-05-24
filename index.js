@@ -16,6 +16,7 @@ const storePostController = require('./controllers/storePost');
 const getPostController = require('./controllers/getPost');
 const validateMiddleware = require('./middleware/validatonMiddleware');
 const authMiddleware = require('./middleware/authMiddleware');
+const redirectMiddleware = require('./middleware/redirectMiddleware');
 const expressSession = require('express-session')
 
 const app = new express();
@@ -43,15 +44,15 @@ app.get('/post/:id', getPostController)
 
 app.get('/posts/new', authMiddleware, newPostController)
 
-app.get('/auth/register', newUserController)
+app.get('/auth/register', redirectMiddleware, newUserController)
 
-app.get('/auth/login', loginController);
+app.get('/auth/login', redirectMiddleware, loginController);
 
 app.post('/posts/store', authMiddleware, storePostController)
 
-app.post('/users/register', storeUserController);
+app.post('/users/register',redirectMiddleware, storeUserController);
 
-app.post('/users/login', loginUserController);
+app.post('/users/login', redirectMiddleware, loginUserController);
 
 
 
