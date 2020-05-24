@@ -9,6 +9,7 @@ const fileUpload = require('express-fileupload');
 const newUserController = require('./controllers/newUser');
 const loginController = require('./controllers/login');
 const loginUserController = require('./controllers/loginUser');
+const logoutUserController = require('./controllers/logout');
 const storeUserController = require('./controllers/storeUser');
 const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
@@ -22,6 +23,8 @@ const expressSession = require('express-session')
 const app = new express();
 const PORT = 3000;
 
+global.loggedIn = null;
+
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -31,6 +34,10 @@ app.use('/posts/store', validateMiddleware)
 app.use(expressSession({
     secret: 'd86j2p412k901scaw'
 }))
+app.use("*", (req, res, next) => {
+    loggedIn = req.session.userId;
+    next()
+});
 app.set('view engine', 'ejs');
 
 
@@ -48,11 +55,14 @@ app.get('/auth/register', redirectMiddleware, newUserController)
 
 app.get('/auth/login', redirectMiddleware, loginController);
 
+app.get('/auth/logout', logoutUserController);
+
 app.post('/posts/store', authMiddleware, storePostController)
 
 app.post('/users/register',redirectMiddleware, storeUserController);
 
 app.post('/users/login', redirectMiddleware, loginUserController);
+
 
 
 
