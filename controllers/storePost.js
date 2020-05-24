@@ -8,5 +8,6 @@ module.exports = (req, res) => {
             ...req.body,
             image: '/img/' + image.name
         })
+        res.redirect('/')
     })
 }
