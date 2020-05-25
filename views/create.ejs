@@ -40,6 +40,12 @@
             <div class="form-group floating-label-form-group controls">
               <label>Message</label>
               <textarea rows="5" class="form-control" placeholder="Have something to say?" id="body" name="body"></textarea>
+              <script>
+                $('#body').summernote({
+                  tabsize: 2,
+                  height: 150
+                }).val()              
+              </script>
             </div>
           </div>
           

@@ -67,7 +67,7 @@ app.post('/users/login', redirectMiddleware, loginUserController);
 
 
 
-mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true, useUnifiedTopology: true })
 
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`)
