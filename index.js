@@ -71,7 +71,7 @@ mongoose.connect('mongodb+srv://admin:Iloveparker19%21@personal-blog-ydjj6.mongo
 
 let PORT = process.env.PORT;
 if (PORT == null || PORT == "") {
-    PORT = 4000;
+    PORT = 3000;
 }
 
 app.listen(PORT, ()=>{
