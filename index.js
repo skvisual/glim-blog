@@ -21,7 +21,6 @@ const redirectMiddleware = require('./middleware/redirectMiddleware');
 const expressSession = require('express-session')
 
 const app = new express();
-const PORT = 3000;
 
 global.loggedIn = null;
 
