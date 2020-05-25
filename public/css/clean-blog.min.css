@@ -14,3 +14,51 @@
     position: relative !important;
     background-image: url('../img/Seoul2.jpg') !important;
 }
+
+.fa-circle {
+    color: black !important;
+}
+
+.list-inline-item {
+    padding: 15px;
+}
+
+.post-title {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  !important;
+}
+
+.post-text {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  !important;
+    font-size: 20px !important;
+}
+
+.nav-header {
+    font-weight: bolder !important;
+    font-size: 32px !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  !important;
+}
+
+.nav-text {
+    font-size: 18px !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  !important;
+}
+
+.masthead-text {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif  !important;
+}
+
+.welcome-banner {
+    font-weight: bold;
+}
+
+.welcome-offical {
+    font-size: 18px;
+}
+
+.welcome-name {
+    font-size: 38px;
+}
+
+.nav-name {
+    color: rgb(255, 255, 255) !important;
+}

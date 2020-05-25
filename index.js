@@ -66,8 +66,9 @@ app.post('/users/login', redirectMiddleware, loginUserController);
 
 
 
+mongoose.connect('mongodb+srv://admin:Iloveparker19%21@personal-blog-ydjj6.mongodb.net/personal-blog', {useNewUrlParser: true, useUnifiedTopology: true })
 
-mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true, useUnifiedTopology: true })
+// mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true, useUnifiedTopology: true })
 
 app.listen(PORT, () => {
     console.log(`App listening on ${PORT}`)
