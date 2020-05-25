@@ -1,6 +1,6 @@
 {
   "title": "Jason Kroening Personal Blog",
-  "name": "Jason Kroening Personal Blog",
+  "name": "personal-blog",
   "version": "5.0.8",
   "scripts": {
     "start": "nodemon index.js"
