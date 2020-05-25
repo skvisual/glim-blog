@@ -9,3 +9,8 @@
     font-weight: 800 !important;
     padding: 5px !important;
 }
+
+.masthead {
+    position: relative !important;
+    background-image: url('../img/Seoul2.jpg') !important;
+}
