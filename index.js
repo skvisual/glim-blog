@@ -70,6 +70,12 @@ mongoose.connect('mongodb+srv://admin:Iloveparker19%21@personal-blog-ydjj6.mongo
 
 // mongoose.connect('mongodb://localhost/blog_db', {useNewUrlParser: true, useUnifiedTopology: true })
 
-app.listen(PORT, () => {
-    console.log(`App listening on ${PORT}`)
+let PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+    PORT = 4000;
+}
+
+app.listen(PORT, ()=>{
+    console.log(`App listenting on ${PORT}`);
+    
 })

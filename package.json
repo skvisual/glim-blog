@@ -1,11 +1,11 @@
 {
-  "title": "Clean Blog",
-  "name": "startbootstrap-clean-blog",
+  "title": "Jason Kroening Personal Blog",
+  "name": "Jason Kroening Personal Blog",
   "version": "5.0.8",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "description": "Clean Blog is a Medium inspired blog theme for Bootstrap.",
+  "description": "A personal blog for the use of Jason Kroening.",
   "keywords": [
     "css",
     "sass",
@@ -20,6 +20,9 @@
     "email": "feedback@startbootstrap.com"
   },
   "license": "MIT",
+  "engines":{
+    "node": "12.16.1"
+  },
   "author": "Start Bootstrap",
   "contributors": [
     "David Miller (http://davidmiller.io/)"
